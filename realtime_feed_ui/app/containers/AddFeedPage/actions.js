@@ -4,10 +4,27 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import { 
+  UPDATE_ATTRIBUTES,
+  SAVE_FEED_ERROR,
+  SAVE_FEED_REQUEST,
+  SAVE_FEED_SUCCESS
+ } from './constants';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const updateAttributes = (attributes) => ({
+  type: UPDATE_ATTRIBUTES,
+  attributes,
+});
+ 
+export const saveFeedRequest = () => ({
+  type: SAVE_FEED_REQUEST,
+});
+ 
+export const saveFeed = () => ({
+  type: SAVE_FEED_SUCCESS,
+});
+ 
+export const saveFeedError = (error) => ({
+  type: SAVE_FEED_ERROR,
+  error,
+});

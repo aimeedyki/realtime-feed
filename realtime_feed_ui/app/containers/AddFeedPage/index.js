@@ -12,28 +12,52 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectAddFeedPage from './selectors';
+import {title,
+  description,
+  error,
+  saving} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import {Form} from '../../components/form'
+import {updateAttributes, saveFeedRequest} from './actions'
 
 /* eslint-disable react/prefer-stateless-function */
 export class AddFeedPage extends React.Component {
   render() {
-    return <div />;
+    {console.log('component', this.props.saving)}
+    return (
+      <div>
+        <Form
+          onChange={(val) => this.props.updateAttributes(val)}
+          onSave={() => this.props.saveFeedRequest()}
+          saving={this.props.saving}
+        />
+      </div>
+    );
   }
 }
 
 AddFeedPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  updateAttributes: PropTypes.func,
+  saveFeedRequest: PropTypes.func,
+  saving: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  addfeedpage: makeSelectAddFeedPage(),
+  title: title(),
+  description: description(),
+  saving: saving(),
+  error: error(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    updateAttributes: (val) => {
+      dispatch(updateAttributes(val));
+    },
+    saveFeedRequest: () => {
+      dispatch(saveFeedRequest());
+    },
   };
 }
 

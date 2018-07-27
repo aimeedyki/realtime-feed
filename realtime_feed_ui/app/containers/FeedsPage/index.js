@@ -102,4 +102,3 @@ export default compose(
   withSaga,
   withConnect,
 )(FeedsPage);
-// export default withConnect()(FeedsPage);
