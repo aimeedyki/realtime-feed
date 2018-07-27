@@ -4,4 +4,7 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/AddFeedPage/DEFAULT_ACTION';
+export const UPDATE_ATTRIBUTES = 'app/AddFeedPage/UPDATE_ATTRIBUTES';
+export const SAVE_FEED_REQUEST = 'app/AddFeedPage/SAVE_FEED_REQUEST';
+export const SAVE_FEED_SUCCESS = 'app/AddFeedPage/SAVE_FEED_SUCCESS';
+export const SAVE_FEED_ERROR = 'app/AddFeedPage/SAVE_FEED_ERROR';
