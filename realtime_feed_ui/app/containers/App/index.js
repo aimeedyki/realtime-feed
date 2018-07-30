@@ -16,7 +16,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import FeedPage from '../FeedsPage/index';
+import FeedPage from '../Feeds/index';
 import AddFeedPage from '../AddFeedPage/index';
 
 export default function App() {
