@@ -1,8 +1,8 @@
 import { all, take, call, put, cancel, takeLatest, fork } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-import { FETCH_FEEDS_REQUEST, FETCH_FEEDS_SUCCESS, HAS_NEW_FEEDS } from 'containers/FeedsPage/constants';
-import { fetchFeeds, fetchFeedsError, checkForNewFeeds } from 'containers/FeedsPage/actions';
+import { FETCH_FEEDS_REQUEST, FETCH_FEEDS_SUCCESS, HAS_NEW_FEEDS } from 'containers/Feeds/constants';
+import { fetchFeeds, fetchFeedsError, checkForNewFeeds } from 'containers/Feeds/actions';
 import request from 'utils/request';
 import { connectToSocket, joinChannel, createSocketChannel, handleUpdatedData } from 'utils/socketSagas';
 

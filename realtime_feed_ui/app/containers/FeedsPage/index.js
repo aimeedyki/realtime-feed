@@ -1,104 +1,46 @@
-/*
- *
- * FeedsPage
- *
- */
-
 import React from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { feeds, isLoading, error, hasNewFeeds } from './selectors';
-import { fetchFeedsRequest } from './actions';
-import { compose } from 'redux';
+import styled from 'styled-components';
+import AddFeed from '../AddFeedPage/index';
+import Feeds from '../Feeds/index';
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import reducer from './reducer';
-import saga from './saga';
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #862600;
+`;
 
-export class FeedsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    this.props.fetchFeedsRequest();
-  }
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  background-color: #AD4015;
+`;
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.hasNewFeeds) {
-      this.props.fetchFeedsRequest();
-    }
-  }
+const FeedContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 500px;
+  background-color: white;
+  height: 70vh;
+  margin: 20px auto;
+  border: 3px solid #040405;
+  border-radius: 10px;
+  padding: 5px;
+`;
 
-  feedsNode() {
-    return [...this.props.feeds].reverse().map((feed) => { // eslint-disable-line arrow-body-style
-      return (
-        <div
-          className="col-12"
-          key={feed.id}
-        >
-          <div
-            className="card"
-            style={{ margin: '15px 0' }}
-          >
-            <div className="card-block">
-              <h3 className="card-title">{ feed.title }</h3>
-              <p className="card-text">{ feed.description }</p>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  }
-
-  render() {
-    if (this.props.loading) {
-      return (
-        <div>Loading...</div>
-      );
-    }
-
-    return (
-      <div className="row">
-        {this.feedsNode()}
-      </div>
-    );
-  }
-}
-
-FeedsPage.propTypes = {
-  fetchFeedsRequest: PropTypes.func,
-  feeds: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]),
-  loading: PropTypes.bool,
-};
-
-const mapStateToProps = createStructuredSelector({
-  feeds: feeds(),
-  loading: isLoading(),
-  error: error(),
-  hasNewFeeds: hasNewFeeds(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchFeedsRequest: () => {
-      dispatch(fetchFeedsRequest());
-    },
-  };
-}
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+const FeedsPage = props => (
+  <Wrapper>
+    <Container>
+      <FeedContainer>
+        <Feeds />
+      </FeedContainer>
+      <AddFeed />
+    </Container>
+  </Wrapper>
 );
 
-const withReducer = injectReducer({ key: 'feedsPage', reducer });
-const withSaga = injectSaga({ key: 'feedsPage', saga });
-
-
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(FeedsPage);
+export default FeedsPage;
