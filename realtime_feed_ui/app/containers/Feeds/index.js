@@ -11,11 +11,21 @@ import { createStructuredSelector } from 'reselect';
 import { feeds, isLoading, error, hasNewFeeds } from './selectors';
 import { fetchFeedsRequest } from './actions';
 import { compose } from 'redux';
+import styled from 'styled-components';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
+
+const FeedContainer = styled.div`
+  background-color: #FFA784;
+  width: 450px;
+  height: auto;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+`;
 
 export class FeedsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -31,20 +41,14 @@ export class FeedsPage extends React.Component { // eslint-disable-line react/pr
   feedsNode() {
     return [...this.props.feeds].reverse().map((feed) => { // eslint-disable-line arrow-body-style
       return (
-        <div
-          className="col-12"
+        <FeedContainer
           key={feed.id}
         >
-          <div
-            className="card"
-            style={{ margin: '15px 0' }}
-          >
-            <div className="card-block">
-              <h3 className="card-title">{ feed.title }</h3>
-              <p className="card-text">{ feed.description }</p>
-            </div>
+          <div className="card-block">
+            <h3 className="card-title">{feed.title}</h3>
+            <p className="card-text">{feed.description}</p>
           </div>
-        </div>
+        </FeedContainer>
       );
     });
   }
